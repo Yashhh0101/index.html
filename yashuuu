@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yash - Aspiring Software Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto+Slab:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #c0c0c0;
+            background-color: #02040a;
+            overflow-x: hidden;
+        }
+
+        #circuit-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Roboto Slab', serif;
+            color: #f0f0f0;
+        }
+        .mono-font {
+            font-family: 'Roboto Mono', monospace;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #00BFFF, #87CEFA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .glass-card {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.2);
+        }
+        
+        .animated-border {
+            position: absolute;
+            background: #00BFFF;
+            box-shadow: 0 0 10px #00BFFF, 0 0 20px #00BFFF;
+        }
+        .glass-card .border-top, .glass-card .border-bottom {
+            height: 2px;
+            width: 0;
+            left: 50%;
+            transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+        }
+        .glass-card .border-left, .glass-card .border-right {
+            width: 2px;
+            height: 0;
+            top: 50%;
+            transition: height 0.3s ease-in-out, top 0.3s ease-in-out;
+            transition-delay: 0.3s;
+        }
+        .glass-card .border-top { top: 0; }
+        .glass-card .border-bottom { bottom: 0; }
+        .glass-card .border-left { left: 0; }
+        .glass-card .border-right { right: 0; }
+        
+        .glass-card:hover .border-top, .glass-card:hover .border-bottom {
+            width: 100%;
+            left: 0;
+        }
+        .glass-card:hover .border-left, .glass-card:hover .border-right {
+            height: 100%;
+            top: 0;
+        }
+        
+        .skill-card:hover .skill-icon {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px #00BFFF);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #00BFFF;
+            transition: width 0.3s;
+        }
+        .nav-link:hover, .nav-link.active  {
+             color: #00BFFF;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+             width: 100%;
+        }
+        .modal-content {
+            white-space: pre-wrap;
+        }
+        
+         #modal-content h3 {
+             font-size: 1.25rem;
+             font-weight: bold;
+             margin-top: 1.5rem;
+             margin-bottom: 0.5rem;
+             text-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+         }
+
+        /* Staggered slide-in animation */
+        .hero-heading span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUpFadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        .hero-heading {
+            transition: text-shadow 0.3s ease-in-out;
+            text-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+        }
+        .hero-heading:hover {
+            text-shadow: 0 0 35px rgba(0, 191, 255, 0.7), 0 0 15px rgba(135, 206, 250, 0.5);
+        }
+        
+        @keyframes slideUpFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 2px rgba(0, 191, 255, 0.4)); }
+            50% { filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.8)); }
+        }
+        .pulsing-icon {
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+
+        /* Scroll Animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="relative">
+    
+    <canvas id="circuit-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 py-4 glass-card">
+        <span class="animated-border border-top"></span>
+        <span class="animated-border border-right"></span>
+        <span class="animated-border border-bottom"></span>
+        <span class="animated-border border-left"></span>
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <h1 class="text-xl font-bold gradient-text mono-font">&gt; Yash_</h1>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#stats" class="nav-link">Stats</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <a href="https://www.linkedin.com/in/yash-62449832a" target="_blank" class="hidden md:inline-block bg-[#00BFFF] text-black font-bold py-2 px-4 rounded-md hover:bg-[#87CEFA] transition-colors">LinkedIn</a>
+            <button id="mobile-menu-button" class="md:hidden">
+                <i data-lucide="menu"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-4">
+            <a href="#about" class="block py-2 nav-link">About</a>
+            <a href="#skills" class="block py-2 nav-link">Skills</a>
+            <a href="#stats" class="block py-2 nav-link">Stats</a>
+            <a href="#projects" class="block py-2 nav-link">Projects</a>
+            <a href="#education" class="block py-2 nav-link">Education</a>
+            <a href="#contact" class="block py-2 nav-link">Contact</a>
+             <a href="https://www.linkedin.com/in/yash-62449832a" target="_blank" class="mt-4 inline-block bg-[#00BFFF] text-black font-bold py-2 px-4 rounded-md hover:bg-[#87CEFA] transition-colors">LinkedIn</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <!-- Hero Section -->
+        <section id="hero" class="text-center min-h-[70vh] flex flex-col justify-center items-center">
+             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 hero-heading" style="font-family: 'Raleway', sans-serif;">
+                <span style="animation-delay: 0.2s;">Yash</span>
+                <span style="animation-delay: 0.4s;">-</span>
+                <span class="gradient-text" style="animation-delay: 0.6s;">Aspiring</span>
+                <span class="gradient-text" style="animation-delay: 0.8s;">Software</span>
+                <span class="gradient-text" style="animation-delay: 1.0s;">Developer</span>
+            </h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 text-gray-400 mono-font">
+                B.Tech CSE Student | DSA Enthusiast | Turning Brute Forces into Optimized Solutions
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="mailto:yash.engineer@gmail.com" class="bg-[#00BFFF] text-black font-bold py-3 px-8 rounded-md hover:bg-[#87CEFA] transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg mono-font">Contact Me</a>
+                <a href="https://leetcode.com/u/yashengineer06/" target="_blank" class="bg-transparent border-2 border-[#00BFFF] text-[#00BFFF] font-bold py-3 px-8 rounded-md hover:bg-[#00BFFF] hover:text-black transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg mono-font">View Portfolio</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 fade-in-section">
+            <h2 class="text-4xl font-bold text-center mb-12">Professional Summary</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-xl text-center">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <div class="mb-4"><i data-lucide="graduation-cap" class="w-12 h-12 mx-auto text-[#00BFFF] pulsing-icon"></i></div>
+                    <h3 class="text-2xl font-bold mb-2">Academic Foundation</h3>
+                    <p class="text-gray-400">Second-year B.Tech CSE student at GGSIPU with strong programming fundamentals and problem-solving skills.</p>
+                </div>
+                <div class="glass-card p-8 rounded-xl text-center">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <div class="mb-4"><i data-lucide="code-2" class="w-12 h-12 mx-auto text-[#00BFFF] pulsing-icon" style="animation-delay: 0.5s"></i></div>
+                    <h3 class="text-2xl font-bold mb-2">Technical Focus</h3>
+                    <p class="text-gray-400">Deepening my understanding of Data Structures and Algorithms to build efficient, scalable solutions.</p>
+                </div>
+                <div class="glass-card p-8 rounded-xl text-center">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <div class="mb-4"><i data-lucide="trending-up" class="w-12 h-12 mx-auto text-[#00BFFF] pulsing-icon" style="animation-delay: 1s"></i></div>
+                    <h3 class="text-2xl font-bold mb-2">Growth Mindset</h3>
+                    <p class="text-gray-400">Committed to continuous learning, particularly interested in software development and hands-on coding projects.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 fade-in-section">
+            <h2 class="text-4xl font-bold text-center mb-12">Core Programming Skills</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="skill-card glass-card p-6 rounded-xl flex flex-col items-center justify-center text-center">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <img src="https://img.icons8.com/color/96/000000/c-programming.png" alt="C Programming language icon" class="w-20 h-20 mb-4 skill-icon transition-all"/>
+                    <h3 class="text-xl font-bold mono-font">C Programming</h3>
+                </div>
+                <div class="skill-card glass-card p-6 rounded-xl flex flex-col items-center justify-center text-center">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <img src="https://img.icons8.com/color/96/000000/c-plus-plus-logo.png" alt="C++ language logo" class="w-20 h-20 mb-4 skill-icon transition-all"/>
+                    <h3 class="text-xl font-bold mono-font">C++</h3>
+                </div>
+                <div class="skill-card glass-card p-6 rounded-xl flex flex-col items-center justify-center text-center">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <img src="https://img.icons8.com/color/96/000000/python--v1.png" alt="Python language logo" class="w-20 h-20 mb-4 skill-icon transition-all"/>
+                    <h3 class="text-xl font-bold mono-font">Python</h3>
+                </div>
+                <div class="skill-card glass-card p-6 rounded-xl flex flex-col items-center justify-center text-center">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <img src="https://img.icons8.com/color/96/000000/html-5--v1.png" alt="HTML5 language logo" class="w-20 h-20 mb-4 skill-icon transition-all"/>
+                    <h3 class="text-xl font-bold mono-font">HTML & CSS</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Follower Count Section -->
+        <section id="stats" class="py-20 fade-in-section">
+            <h2 class="text-4xl font-bold text-center mb-12">My Community Presence</h2>
+            <p class="text-center text-gray-400 mb-8 max-w-2xl mx-auto">Here's a snapshot of my growing network. These numbers are animated for effect but represent a static count.</p>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="glass-card p-8 rounded-xl">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <i data-lucide="linkedin" class="w-12 h-12 mx-auto mb-4 text-[#00BFFF] pulsing-icon"></i>
+                    <h3 class="text-5xl font-bold mono-font" data-target="9000" data-plus="true">0</h3>
+                    <p class="text-gray-400 mt-2">LinkedIn Connections</p>
+                </div>
+                <div class="glass-card p-8 rounded-xl">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <i data-lucide="code" class="w-12 h-12 mx-auto mb-4 text-[#00BFFF] pulsing-icon" style="animation-delay: 0.5s"></i>
+                    <h3 class="text-5xl font-bold mono-font" data-target="200">0</h3>
+                    <p class="text-gray-400 mt-2">LeetCode Problems Solved</p>
+                </div>
+                <div class="glass-card p-8 rounded-xl">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <i data-lucide="github" class="w-12 h-12 mx-auto mb-4 text-[#00BFFF] pulsing-icon" style="animation-delay: 1s"></i>
+                    <h3 class="text-5xl font-bold mono-font" data-target="25">0</h3>
+                    <p class="text-gray-400 mt-2">GitHub Repositories</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 fade-in-section">
+            <h2 class="text-4xl font-bold text-center mb-12">Projects & Learning</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-card p-8 rounded-xl">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <h3 class="text-2xl font-bold mb-2">Hands-on Coding</h3>
+                    <p class="text-gray-400">Building practical projects to apply theoretical knowledge and develop real-world programming skills.</p>
+                </div>
+                <div class="glass-card p-8 rounded-xl">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <h3 class="text-2xl font-bold mb-2">Version Control</h3>
+                    <p class="text-gray-400">Learning Git and collaborative development practices to work effectively in team environments.</p>
+                </div>
+                <div class="glass-card p-8 rounded-xl">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <h3 class="text-2xl font-bold mb-2">LeetCode Practice</h3>
+                    <p class="text-gray-400">Regular problem-solving to strengthen algorithmic thinking and prepare for technical interviews.</p>
+                </div>
+                 <div class="glass-card p-8 rounded-xl flex flex-col justify-center items-center text-center bg-[#00BFFF]/10">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <h3 class="text-2xl font-bold mb-4">✨ AI Project Ideas</h3>
+                    <p class="text-gray-300 mb-6">Get personalized project ideas based on my skills.</p>
+                    <button id="generate-projects-btn" class="bg-[#00BFFF] text-black font-bold py-3 px-6 rounded-md hover:bg-[#87CEFA] transition-colors mono-font">
+                        Generate Ideas
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-20 fade-in-section">
+            <h2 class="text-4xl font-bold text-center mb-12">Educational Background</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="border-l-2 border-[#00BFFF]">
+                    <!-- Timeline Item 1 -->
+                    <div class="relative pl-10 pb-10">
+                        <div class="absolute -left-4 top-1 w-8 h-8 bg-[#00BFFF] rounded-full border-4 border-[#02040a] flex items-center justify-center font-bold text-black mono-font">1</div>
+                        <p class="text-sm text-gray-400 mono-font">August 2024 - August 2028</p>
+                        <h3 class="text-2xl font-bold mt-1">Bachelor of Technology</h3>
+                        <p class="text-lg text-gray-300">Computer Science Engineering</p>
+                        <p class="text-gray-400">Guru Gobind Singh Indraprastha University</p>
+                    </div>
+                    <!-- Timeline Item 2 -->
+                    <div class="relative pl-10">
+                        <div class="absolute -left-4 top-1 w-8 h-8 bg-[#00BFFF] rounded-full border-4 border-[#02040a] flex items-center justify-center font-bold text-black mono-font">2</div>
+                        <p class="text-sm text-gray-400 mono-font">Current Institution</p>
+                        <h3 class="text-2xl font-bold mt-1">Dr. Akhilesh Das Gupta Institute of Professional Studies</h3>
+                        <p class="text-lg text-gray-300">Affiliated with GGSIPU</p>
+                        <p class="text-gray-400">Focused on practical programming and industry-relevant skills.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 text-center fade-in-section">
+            <h2 class="text-4xl font-bold mb-4">Let's Connect</h2>
+            <p class="text-lg max-w-2xl mx-auto mb-8 text-gray-400">
+                Ready to contribute to innovative projects and continue growing in the tech field. I'm passionate about creating efficient solutions and collaborating with like-minded professionals.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                 <a href="mailto:yash.engineer@gmail.com" class="bg-[#00BFFF] text-black font-bold py-3 px-8 rounded-md hover:bg-[#87CEFA] transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg mono-font">Get In Touch</a>
+                <a href="https://www.linkedin.com/in/yash-62449832a" target="_blank" class="bg-transparent border-2 border-[#00BFFF] text-[#00BFFF] font-bold py-3 px-8 rounded-md hover:bg-[#00BFFF] hover:text-black transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg mono-font">LinkedIn Profile</a>
+                <button id="generate-career-btn" class="bg-transparent border-2 border-[#0077b6] text-[#0077b6] font-bold py-3 px-8 rounded-md hover:bg-[#0077b6] hover:text-white transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg flex items-center gap-2 mono-font">
+                    ✨ Suggest Career Paths
+                </button>
+            </div>
+        </section>
+    </main>
+    
+    <!-- AI Modal -->
+    <div id="ai-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex justify-center items-center p-4 hidden">
+        <div class="glass-card rounded-2xl w-full max-w-2xl max-h-[80vh] flex flex-col">
+            <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+            <div class="flex justify-between items-center p-6 border-b border-white/10">
+                <h3 id="modal-title" class="text-2xl font-bold gradient-text mono-font">AI Suggestions</h3>
+                <button id="close-modal-btn">
+                    <i data-lucide="x" class="text-gray-400 hover:text-white"></i>
+                </button>
+            </div>
+            <div id="modal-content" class="p-8 overflow-y-auto">
+                <!-- AI content will be injected here -->
+                 <div class="flex items-center justify-center h-48">
+                    <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-[#00BFFF]"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="text-center py-6 border-t border-white/10 mt-12">
+        <p class="text-gray-500 mono-font">&copy; <span id="current-year">2025</span> Yash. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // Dynamically set the current year in the footer.
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Canvas Animation
+            const canvas = document.getElementById('circuit-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let width, height;
+                let particles = [];
+                const particleCount = 100;
+
+                function resizeCanvas() {
+                    width = canvas.width = window.innerWidth;
+                    height = canvas.height = window.innerHeight;
+                    particles = [];
+                    init();
+                }
+
+                class Particle {
+                    constructor() {
+                        this.x = Math.random() * width;
+                        this.y = Math.random() * height;
+                        this.size = Math.random() * 1.5 + 1;
+                        this.speedX = Math.random() * 2 - 1;
+                        this.speedY = Math.random() * 2 - 1;
+                        this.color = `rgba(0, 191, 255, ${Math.random() * 0.5 + 0.2})`;
+                    }
+                    update() {
+                        if (this.x > width || this.x < 0) { this.speedX *= -1; }
+                        if (this.y > height || this.y < 0) { this.speedY *= -1; }
+                        this.x += this.speedX;
+                        this.y += this.speedY;
+                    }
+                    draw() {
+                        ctx.fillStyle = this.color;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                function init() {
+                    for (let i = 0; i < particleCount; i++) {
+                        particles.push(new Particle());
+                    }
+                }
+
+                function connect() {
+                    let opacityValue = 1;
+                    for (let a = 0; a < particles.length; a++) {
+                        for (let b = a; b < particles.length; b++) {
+                            let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x))
+                                         + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
+                            if (distance < (width/7) * (height/7)) {
+                                opacityValue = 1 - (distance / 20000);
+                                ctx.strokeStyle = `rgba(0, 191, 255, ${opacityValue * 0.1})`;
+                                ctx.lineWidth = 1;
+                                ctx.beginPath();
+                                ctx.moveTo(particles[a].x, particles[a].y);
+                                ctx.lineTo(particles[b].x, particles[b].y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                }
+
+                function animate() {
+                    ctx.clearRect(0, 0, width, height);
+                    for (let i = 0; i < particles.length; i++) {
+                        particles[i].update();
+                        particles[i].draw();
+                    }
+                    connect();
+                    requestAnimationFrame(animate);
+                }
+                
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+                animate();
+            }
+
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Counter Animation
+            const statsSection = document.getElementById('stats');
+            if (statsSection) {
+                const counters = document.querySelectorAll('#stats [data-target]');
+                const animateCounters = () => {
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const hasPlus = counter.getAttribute('data-plus') === 'true';
+                        counter.innerText = '0'; // Reset counter
+                        const updateCount = () => {
+                            const count = +counter.innerText.replace(/,|\+/g, '');
+                            const increment = Math.max(1, Math.ceil(target / 100));
+
+                            if (count < target) {
+                                const newCount = Math.min(target, count + increment);
+                                counter.innerText = Math.ceil(newCount).toLocaleString();
+                                setTimeout(updateCount, 20);
+                            } else {
+                                counter.innerText = target.toLocaleString() + (hasPlus ? '+' : '');
+                            }
+                        };
+                        updateCount();
+                    });
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateCounters();
+                            observer.unobserve(entry.target); // Animate only once
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                observer.observe(statsSection);
+            }
+
+
+            // Smooth scrolling for nav links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(this.getAttribute('href'));
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                    // Close mobile menu on click
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Gemini API Integration
+            const modal = document.getElementById('ai-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const generateProjectsBtn = document.getElementById('generate-projects-btn');
+            const generateCareerBtn = document.getElementById('generate-career-btn');
+            
+            if (modal && closeModalBtn && generateProjectsBtn && generateCareerBtn) {
+                const loadingSpinner = `<div class="flex items-center justify-center h-48"><div class="animate-spin rounded-full h-16 w-16 border-b-2 border-[#00BFFF]"></div></div>`;
+
+                const openModal = () => modal.classList.remove('hidden');
+                const closeModal = () => modal.classList.add('hidden');
+
+                closeModalBtn.addEventListener('click', closeModal);
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeModal();
+                    }
+                });
+            
+                function simpleMarkdownToHtml(text) {
+                    let processedText = text
+                        .replace(/^### (.*$)/gm, '<h3 class="text-2xl font-bold mt-6 mb-2 text-sky-300">$1</h3>')
+                        .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-sky-400">$1</strong>')
+                        .replace(/`([^`]+)`/g, '<code class="bg-gray-800 text-cyan-300 rounded px-1 py-0.5 mono-font text-sm">$1</code>');
+
+                    const blocks = processedText.split(/\n\s*\n/); 
+
+                    return blocks.map(block => {
+                        const trimmedBlock = block.trim();
+                        if (!trimmedBlock) return '';
+
+                        const lines = trimmedBlock.split('\n');
+                        const isList = lines.every(line => line.trim().startsWith('* ') || line.trim().startsWith('- '));
+
+                        if (isList) {
+                            const listItems = lines.map(line => `<li class="ml-4">${line.trim().substring(2).trim()}</li>`).join('');
+                            return `<ul class="space-y-2 mb-4" style="list-style-type: '» ';">${listItems}</ul>`;
+                        } else {
+                            return `<p class="mb-4 text-gray-300">${trimmedBlock.replace(/\n/g, ' ')}</p>`;
+                        }
+                    }).join('');
+                }
+
+                const callGeminiAPI = async (userQuery, systemInstruction) => {
+                    modalContent.innerHTML = loadingSpinner;
+                    openModal();
+                    
+                    const apiKey = ""; 
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+                    
+                    const payload = {
+                        contents: [{ parts: [{ text: userQuery }] }],
+                    };
+
+                    if (systemInstruction) {
+                        payload.systemInstruction = {
+                            parts: [{ text: systemInstruction }]
+                        };
+                    }
+
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            const errorBody = await response.text();
+                            console.error("API Error Response:", errorBody);
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+                        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                        if (text) {
+                            modalContent.innerHTML = simpleMarkdownToHtml(text);
+                        } else {
+                            console.error("No content in API response:", result);
+                            throw new Error("No content received from API.");
+                        }
+
+                    } catch (error) {
+                        console.error("Error calling Gemini API:", error);
+                        modalContent.innerHTML = `<p class="text-red-400">Sorry, an error occurred while generating the response. This may be due to API restrictions in the current environment. Please check the console for more details.</p>`;
+                    }
+                };
+                
+                generateProjectsBtn.addEventListener('click', () => {
+                    modalTitle.innerText = "✨ AI Project Ideas";
+                    const systemPrompt = "You are a helpful tech mentor for a computer science student. Generate 3 creative and practical project ideas that would be impressive for a portfolio. Format the response cleanly using Markdown headings (###) for each project title and bullet points (* or -) for the description and technologies used.";
+                    const userQuery = `Based on my skills in C, C++, Python, HTML, CSS, and Data Structures & Algorithms, suggest 3 portfolio project ideas. I am a second-year B.Tech CSE student interested in software development. The ideas should be challenging but achievable.`;
+                    callGeminiAPI(userQuery, systemPrompt);
+                });
+
+                generateCareerBtn.addEventListener('click', () => {
+                    modalTitle.innerText = "✨ AI Career Path Suggestions";
+                    const userProfile = "A second-year B.Tech Computer Science Engineering student with strong fundamentals in C, C++, Python, HTML/CSS, and a deep interest in Data Structures and Algorithms. They have a growth mindset, are committed to continuous learning, and are seeking to apply their skills in real-world software development scenarios.";
+                    const systemPrompt = "You are an expert career advisor for tech students. Based on the student's profile, suggest 3-4 potential career paths. For each path, provide a brief description and list key skills to focus on. Use Markdown headings (###) for each path and bullet points (* or -) for details.";
+                    const userQuery = `Given my student profile, what are some suitable career paths I could pursue? My Profile: ${userProfile}`;
+                    callGeminiAPI(userQuery, systemPrompt);
+                });
+            }
+
+            // Scroll Animation Observer
+            const sections = document.querySelectorAll('.fade-in-section');
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                scrollObserver.observe(section);
+            });
+
+        });
+    </script>
+</body>
+</html>
+
+
+
