@@ -165,6 +165,7 @@
             opacity: 1;
             transform: translateY(0);
         }
+
     </style>
 </head>
 <body class="relative">
@@ -177,7 +178,7 @@
         <span class="animated-border border-right"></span>
         <span class="animated-border border-bottom"></span>
         <span class="animated-border border-left"></span>
-        <nav class="container mx-auto px-6 flex justify-between items-center">
+        <nav class="container mx-auto px-4 sm:px-6 flex justify-between items-center">
             <h1 class="text-xl font-bold gradient-text mono-font">&gt; Yash_</h1>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#about" class="nav-link">About</a>
@@ -204,10 +205,10 @@
         </div>
     </header>
 
-    <main class="container mx-auto px-6 py-12">
+    <main class="container mx-auto px-4 sm:px-6 py-12">
         <!-- Hero Section -->
         <section id="hero" class="text-center min-h-[70vh] flex flex-col justify-center items-center">
-             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 hero-heading" style="font-family: 'Raleway', sans-serif;">
+             <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-4 hero-heading" style="font-family: 'Raleway', sans-serif;">
                 <span style="animation-delay: 0.2s;">Yash</span>
                 <span style="animation-delay: 0.4s;">-</span>
                 <span class="gradient-text" style="animation-delay: 0.6s;">Aspiring</span>
@@ -217,9 +218,9 @@
             <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 text-gray-400 mono-font">
                 B.Tech CSE Student | DSA Enthusiast | Turning Brute Forces into Optimized Solutions
             </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="mailto:yash.engineer06@gmail.com" class="bg-[#00BFFF] text-black font-bold py-3 px-8 rounded-md hover:bg-[#87CEFA] transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg mono-font">Contact Me</a>
-                <a href="https://leetcode.com/u/yashengineer06/" target="_blank" class="bg-transparent border-2 border-[#00BFFF] text-[#00BFFF] font-bold py-3 px-8 rounded-md hover:bg-[#00BFFF] hover:text-black transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg mono-font">View Portfolio</a>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="mailto:yash.engineer06@gmail.com" class="w-full sm:w-auto bg-[#00BFFF] text-black font-bold py-3 px-8 rounded-md hover:bg-[#87CEFA] transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg mono-font">Contact Me</a>
+                <a href="https://leetcode.com/u/yashengineer06/" target="_blank" class="w-full sm:w-auto bg-transparent border-2 border-[#00BFFF] text-[#00BFFF] font-bold py-3 px-8 rounded-md hover:bg-[#00BFFF] hover:text-black transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg mono-font">View Portfolio</a>
             </div>
         </section>
 
@@ -233,13 +234,13 @@
                     <h3 class="text-2xl font-bold mb-2">Academic Foundation</h3>
                     <p class="text-gray-400">Second-year B.Tech CSE student at GGSIPU with strong programming fundamentals and problem-solving skills.</p>
                 </div>
-                <div class="glass-card p-8 rounded-xl text-center">
+                <div class="glass-card p-8 rounded-xl text-center mt-8 md:mt-0">
                     <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
                     <div class="mb-4"><i data-lucide="code-2" class="w-12 h-12 mx-auto text-[#00BFFF] pulsing-icon" style="animation-delay: 0.5s"></i></div>
                     <h3 class="text-2xl font-bold mb-2">Technical Focus</h3>
                     <p class="text-gray-400">Deepening my understanding of Data Structures and Algorithms to build efficient, scalable solutions.</p>
                 </div>
-                <div class="glass-card p-8 rounded-xl text-center">
+                <div class="glass-card p-8 rounded-xl text-center mt-8 md:mt-0">
                     <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
                     <div class="mb-4"><i data-lucide="trending-up" class="w-12 h-12 mx-auto text-[#00BFFF] pulsing-icon" style="animation-delay: 1s"></i></div>
                     <h3 class="text-2xl font-bold mb-2">Growth Mindset</h3>
@@ -278,19 +279,19 @@
         <!-- Live Follower Count Section -->
         <section id="stats" class="py-20 fade-in-section">
             <h2 class="text-4xl font-bold text-center mb-12">My Community Presence</h2>
-            <p class="text-center text-gray-400 mb-8 max-w-2xl mx-auto">Here's a snapshot of my growing network. These numbers are animated for effect but represent a static count.</p>
-            <div class="grid md:grid-cols-3 gap-8 text-center">
+            <p class="text-center text-gray-400 mb-8 max-w-2xl mx-auto">Here's a snapshot of my growing network on professional platforms.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                 <div class="glass-card p-8 rounded-xl">
                     <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
                     <i data-lucide="linkedin" class="w-12 h-12 mx-auto mb-4 text-[#00BFFF] pulsing-icon"></i>
-                    <h3 class="text-5xl font-bold mono-font" data-target="9500" data-plus="true">0</h3>
+                    <h3 class="text-5xl font-bold mono-font" data-target="9600" data-plus="true">0</h3>
                     <p class="text-gray-400 mt-2">LinkedIn Connections</p>
                 </div>
                 <div class="glass-card p-8 rounded-xl">
                     <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
                     <i data-lucide="code" class="w-12 h-12 mx-auto mb-4 text-[#00BFFF] pulsing-icon" style="animation-delay: 0.5s"></i>
                     <h3 class="text-5xl font-bold mono-font" data-target="200">0</h3>
-                    <p class="text-gray-400 mt-2">LeetCode Problems Solved</p>
+                    <p class="text-gray-400 mt-2">LeetCode Problems</p>
                 </div>
                 <div class="glass-card p-8 rounded-xl">
                     <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
@@ -301,10 +302,52 @@
             </div>
         </section>
 
+        <!-- Analytics Section -->
+        <section id="analytics" class="py-20 fade-in-section">
+            <h2 class="text-4xl font-bold text-center mb-12">Professional Analytics</h2>
+            <p class="text-center text-gray-400 mb-8 max-w-2xl mx-auto">A glimpse into my reach and engagement on platforms like LinkedIn. (Static data for demonstration).</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1: Post Impressions -->
+                <div class="glass-card p-6 rounded-xl text-left">
+                     <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                     <h3 class="text-4xl font-bold mono-font">2,981,781</h3>
+                     <p class="text-gray-300 mt-2 text-lg">Post impressions</p>
+                     <div class="flex items-center mt-1 text-green-400">
+                         <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                         <span class="text-sm ml-1">204.8% past 90 days</span>
+                     </div>
+                </div>
+                <!-- Card 2: Followers -->
+                <div class="glass-card p-6 rounded-xl text-left">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <h3 class="text-4xl font-bold mono-font">9,656</h3>
+                    <p class="text-gray-300 mt-2 text-lg">Followers</p>
+                    <div class="flex items-center mt-1 text-green-400">
+                        <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                        <span class="text-sm ml-1">12.3% past 7 days</span>
+                    </div>
+                </div>
+                <!-- Card 3: Profile Viewers -->
+                <div class="glass-card p-6 rounded-xl text-left">
+                   <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                   <h3 class="text-4xl font-bold mono-font">19,885</h3>
+                   <p class="text-gray-300 mt-2 text-lg">Profile viewers</p>
+                   <p class="text-sm text-gray-400 mt-1">Past 90 days</p>
+                </div>
+                <!-- Card 4: Search Appearances -->
+                <div class="glass-card p-6 rounded-xl text-left">
+                    <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
+                    <h3 class="text-4xl font-bold mono-font">112</h3>
+                    <p class="text-gray-300 mt-2 text-lg">Search appearances</p>
+                    <p class="text-sm text-gray-400 mt-1">Previous week</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Projects Section -->
         <section id="projects" class="py-20 fade-in-section">
             <h2 class="text-4xl font-bold text-center mb-12">Projects & Learning</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="glass-card p-8 rounded-xl">
                     <span class="animated-border border-top"></span><span class="animated-border border-right"></span><span class="animated-border border-bottom"></span><span class="animated-border border-left"></span>
                     <h3 class="text-2xl font-bold mb-2">Hands-on Coding</h3>
@@ -362,11 +405,11 @@
             <p class="text-lg max-w-2xl mx-auto mb-8 text-gray-400">
                 Ready to contribute to innovative projects and continue growing in the tech field. I'm passionate about creating efficient solutions and collaborating with like-minded professionals.
             </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                 <a href="mailto:yash.engineer@gmail.com" class="bg-[#00BFFF] text-black font-bold py-3 px-8 rounded-md hover:bg-[#87CEFA] transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg mono-font">Get In Touch</a>
-                <a href="https://www.linkedin.com/in/yash-62449832a" target="_blank" class="bg-transparent border-2 border-[#00BFFF] text-[#00BFFF] font-bold py-3 px-8 rounded-md hover:bg-[#00BFFF] hover:text-black transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg mono-font">LinkedIn Profile</a>
-                <button id="generate-career-btn" class="bg-transparent border-2 border-[#0077b6] text-[#0077b6] font-bold py-3 px-8 rounded-md hover:bg-[#0077b6] hover:text-white transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg flex items-center gap-2 mono-font">
-                    ✨ Suggest Career Paths
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                 <a href="mailto:yash.engineer06@gmail.com" class="w-full sm:w-auto bg-[#00BFFF] text-black font-bold py-3 px-8 rounded-md hover:bg-[#87CEFA] transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg mono-font">Get In Touch</a>
+                <a href="https://www.linkedin.com/in/yash-62449832a" target="_blank" class="w-full sm:w-auto bg-transparent border-2 border-[#00BFFF] text-[#00BFFF] font-bold py-3 px-8 rounded-md hover:bg-[#00BFFF] hover:text-black transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg mono-font">LinkedIn Profile</a>
+                <button id="generate-career-btn" class="w-full sm:w-auto bg-transparent border-2 border-[#0077b6] text-[#0077b6] font-bold py-3 px-8 rounded-md hover:bg-[#0077b6] hover:text-white transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg flex items-center justify-center gap-2 mono-font">
+                    <span class="whitespace-nowrap">✨ Suggest Career Paths</span>
                 </button>
             </div>
         </section>
@@ -399,7 +442,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             lucide.createIcons();
-            
+
             // Dynamically set the current year in the footer.
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
@@ -645,7 +688,7 @@
 
                 generateCareerBtn.addEventListener('click', () => {
                     modalTitle.innerText = "✨ AI Career Path Suggestions";
-                    const userProfile = "A second-year B.Tech Computer Science Engineering student with strong fundamentals in C, C++, Python, HTML/CSS, and a deep interest in Data Structures and Algorithms. They have a growth mindset, are committed to continuous learning, and are seeking to apply their skills in real-world software development scenarios.";
+                    const userProfile = `A second-year B.Tech Computer Science Engineering student with strong fundamentals in C, C++, Python, HTML/CSS, and a deep interest in Data Structures and Algorithms. They have a growth mindset, are committed to continuous learning, and are seeking to apply their skills in real-world software development scenarios.`;
                     const systemPrompt = "You are an expert career advisor for tech students. Based on the student's profile, suggest 3-4 potential career paths. For each path, provide a brief description and list key skills to focus on. Use Markdown headings (###) for each path and bullet points (* or -) for details.";
                     const userQuery = `Given my student profile, what are some suitable career paths I could pursue? My Profile: ${userProfile}`;
                     callGeminiAPI(userQuery, systemPrompt);
@@ -671,6 +714,4 @@
     </script>
 </body>
 </html>
-
-
 
